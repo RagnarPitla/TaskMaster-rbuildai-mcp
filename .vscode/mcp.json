@@ -1,0 +1,9 @@
+{
+  "servers": {
+    "taskmaster-rbuildai": {
+      "command": "node",
+      "args": ["dist/index.js"],
+      "type": "stdio"
+    }
+  }
+}

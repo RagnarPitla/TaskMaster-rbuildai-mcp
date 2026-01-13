@@ -1,0 +1,46 @@
+{
+  "name": "taskmaster-rbuildai-mcp",
+  "version": "0.1.0",
+  "description": "A task master MCP server for AI-driven development in VS Code by RBuildAI",
+  "main": "dist/index.js",
+  "type": "module",
+  "bin": {
+    "taskmaster-rbuildai": "dist/index.js",
+    "taskmaster-rbuildai-mcp": "dist/index.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "start": "node dist/index.js",
+    "inspector": "npx @modelcontextprotocol/inspector node dist/index.js"
+  },
+  "keywords": [
+    "mcp",
+    "task-master",
+    "ai",
+    "vscode",
+    "cursor",
+    "copilot",
+    "task-management"
+  ],
+  "author": "Ragnar",
+  "license": "MIT",
+  "dependencies": {
+    "fastmcp": "^3.23.1",
+    "zod": "^3.24.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "typescript": "^5.7.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ]
+}
