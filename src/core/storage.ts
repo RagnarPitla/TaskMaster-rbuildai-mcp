@@ -6,7 +6,7 @@ import * as fs from 'node:fs';
 import * as path from 'node:path';
 import type { Task, TaskStore } from './types.js';
 
-const TASKMASTER_DIR = '.taskmaster';
+const RTASKMASTER_DIR = '.rtaskmaster';
 const TASKS_FILE = 'tasks.json';
 const VERSION = '1.0.0';
 
@@ -16,24 +16,24 @@ export class TaskStorage {
 
   constructor(projectRoot: string) {
     this.projectRoot = projectRoot;
-    this.tasksPath = path.join(projectRoot, TASKMASTER_DIR, TASKS_FILE);
+    this.tasksPath = path.join(projectRoot, RTASKMASTER_DIR, TASKS_FILE);
   }
 
   /**
-   * Check if TaskMaster is initialized in the project
+   * Check if RTaskmaster is initialized in the project
    */
   isInitialized(): boolean {
     return fs.existsSync(this.tasksPath);
   }
 
   /**
-   * Initialize TaskMaster in the project
+   * Initialize RTaskmaster in the project
    */
   initialize(projectName?: string): TaskStore {
-    const taskmasterDir = path.join(this.projectRoot, TASKMASTER_DIR);
+    const rtaskmasterDir = path.join(this.projectRoot, RTASKMASTER_DIR);
     
-    if (!fs.existsSync(taskmasterDir)) {
-      fs.mkdirSync(taskmasterDir, { recursive: true });
+    if (!fs.existsSync(rtaskmasterDir)) {
+      fs.mkdirSync(rtaskmasterDir, { recursive: true });
     }
 
     const store: TaskStore = {
@@ -45,10 +45,10 @@ export class TaskStorage {
 
     this.save(store);
     
-    // Create .gitignore in .taskmaster if it doesn't exist
-    const gitignorePath = path.join(taskmasterDir, '.gitignore');
+    // Create .gitignore in .rtaskmaster if it doesn't exist
+    const gitignorePath = path.join(rtaskmasterDir, '.gitignore');
     if (!fs.existsSync(gitignorePath)) {
-      fs.writeFileSync(gitignorePath, '# Ragnar files to ignore\n');
+      fs.writeFileSync(gitignorePath, '# RTaskmaster files to ignore\n');
     }
 
     return store;
@@ -60,7 +60,7 @@ export class TaskStorage {
   load(): TaskStore {
     if (!this.isInitialized()) {
       throw new Error(
-        'Ragnar is not initialized in this project. Run ragnar_init first.'
+        'RTaskmaster is not initialized in this project. Run rtaskmaster_init first.'
       );
     }
 

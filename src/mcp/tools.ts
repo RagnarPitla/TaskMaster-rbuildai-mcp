@@ -1,5 +1,5 @@
 /**
- * MCP Tools - All tool definitions for TaskMaster Task Master
+ * MCP Tools - All tool definitions for RTaskmaster Task Master
  */
 
 import { z } from "zod";
@@ -35,14 +35,14 @@ const StatusSchema = z.enum([
 const PrioritySchema = z.enum(["high", "medium", "low"]);
 
 /**
- * Register all TaskMaster MCP tools
+ * Register all RTaskmaster MCP tools
  */
 export function registerTools(server: FastMCP) {
   // ============ INIT ============
   server.addTool({
-    name: "taskmaster_init",
+    name: "rtaskmaster_init",
     description:
-      "Initialize TaskMaster Task Master in a project. Creates .taskmaster directory with tasks.json.",
+      "Initialize RTaskmaster Task Master in a project. Creates .rtaskmaster directory with tasks.json.",
     parameters: z.object({
       projectRoot: z
         .string()
@@ -57,7 +57,7 @@ export function registerTools(server: FastMCP) {
           content: [
             {
               type: "text",
-              text: "✅ TaskMaster is already initialized in this project.",
+              text: "✅ RTaskmaster is already initialized in this project.",
             },
           ],
         };
@@ -68,7 +68,7 @@ export function registerTools(server: FastMCP) {
         content: [
           {
             type: "text",
-            text: `✅ TaskMaster initialized successfully!\n\nProject: ${store.projectName}\nTasks file: ${args.projectRoot}/.taskmaster/tasks.json\n\nYou can now create tasks using taskmaster_create_task.`,
+            text: `✅ RTaskmaster initialized successfully!\n\nProject: ${store.projectName}\nTasks file: ${args.projectRoot}/.rtaskmaster/tasks.json\n\nYou can now create tasks using rtaskmaster_create_task.`,
           },
         ],
       };
@@ -77,7 +77,7 @@ export function registerTools(server: FastMCP) {
 
   // ============ GET TASKS ============
   server.addTool({
-    name: "taskmaster_get_tasks",
+    name: "rtaskmaster_get_tasks",
     description:
       "Get all tasks from the project, optionally filtered by status or priority.",
     parameters: z.object({
@@ -95,7 +95,7 @@ export function registerTools(server: FastMCP) {
           content: [
             {
               type: "text",
-              text: "❌ TaskMaster is not initialized. Run taskmaster_init first.",
+              text: "❌ RTaskmaster is not initialized. Run rtaskmaster_init first.",
             },
           ],
         };
@@ -112,7 +112,7 @@ export function registerTools(server: FastMCP) {
           content: [
             {
               type: "text",
-              text: "📋 No tasks found.\n\nCreate your first task using taskmaster_create_task.",
+              text: "📋 No tasks found.\n\nCreate your first task using rtaskmaster_create_task.",
             },
           ],
         };
@@ -162,7 +162,7 @@ export function registerTools(server: FastMCP) {
 
   // ============ GET TASK ============
   server.addTool({
-    name: "taskmaster_get_task",
+    name: "rtaskmaster_get_task",
     description: "Get detailed information about a specific task or subtask.",
     parameters: TaskIdSchema,
     execute: async (args) => {
@@ -173,7 +173,7 @@ export function registerTools(server: FastMCP) {
           content: [
             {
               type: "text",
-              text: "❌ TaskMaster is not initialized. Run taskmaster_init first.",
+              text: "❌ RTaskmaster is not initialized. Run rtaskmaster_init first.",
             },
           ],
         };
@@ -243,7 +243,7 @@ export function registerTools(server: FastMCP) {
 
   // ============ CREATE TASK ============
   server.addTool({
-    name: "taskmaster_create_task",
+    name: "rtaskmaster_create_task",
     description: "Create a new task.",
     parameters: z.object({
       projectRoot: z
@@ -272,7 +272,7 @@ export function registerTools(server: FastMCP) {
           content: [
             {
               type: "text",
-              text: "❌ TaskMaster is not initialized. Run taskmaster_init first.",
+              text: "❌ RTaskmaster is not initialized. Run rtaskmaster_init first.",
             },
           ],
         };
@@ -300,7 +300,7 @@ export function registerTools(server: FastMCP) {
 
   // ============ UPDATE TASK ============
   server.addTool({
-    name: "taskmaster_update_task",
+    name: "rtaskmaster_update_task",
     description: "Update an existing task.",
     parameters: z.object({
       projectRoot: z
@@ -322,7 +322,7 @@ export function registerTools(server: FastMCP) {
           content: [
             {
               type: "text",
-              text: "❌ TaskMaster is not initialized. Run taskmaster_init first.",
+              text: "❌ RTaskmaster is not initialized. Run rtaskmaster_init first.",
             },
           ],
         };
@@ -350,7 +350,7 @@ export function registerTools(server: FastMCP) {
 
   // ============ DELETE TASK ============
   server.addTool({
-    name: "taskmaster_delete_task",
+    name: "rtaskmaster_delete_task",
     description: "Delete a task.",
     parameters: TaskIdSchema,
     execute: async (args) => {
@@ -361,7 +361,7 @@ export function registerTools(server: FastMCP) {
           content: [
             {
               type: "text",
-              text: "❌ TaskMaster is not initialized. Run taskmaster_init first.",
+              text: "❌ RTaskmaster is not initialized. Run rtaskmaster_init first.",
             },
           ],
         };
@@ -385,7 +385,7 @@ export function registerTools(server: FastMCP) {
 
   // ============ SET STATUS ============
   server.addTool({
-    name: "taskmaster_set_status",
+    name: "rtaskmaster_set_status",
     description: "Update the status of a task or subtask.",
     parameters: z.object({
       projectRoot: z
@@ -404,7 +404,7 @@ export function registerTools(server: FastMCP) {
           content: [
             {
               type: "text",
-              text: "❌ TaskMaster is not initialized. Run taskmaster_init first.",
+              text: "❌ RTaskmaster is not initialized. Run rtaskmaster_init first.",
             },
           ],
         };
@@ -433,7 +433,7 @@ export function registerTools(server: FastMCP) {
 
   // ============ ADD SUBTASK ============
   server.addTool({
-    name: "taskmaster_add_subtask",
+    name: "rtaskmaster_add_subtask",
     description: "Add a subtask to an existing task.",
     parameters: z.object({
       projectRoot: z
@@ -451,7 +451,7 @@ export function registerTools(server: FastMCP) {
           content: [
             {
               type: "text",
-              text: "❌ TaskMaster is not initialized. Run taskmaster_init first.",
+              text: "❌ RTaskmaster is not initialized. Run rtaskmaster_init first.",
             },
           ],
         };
@@ -483,7 +483,7 @@ export function registerTools(server: FastMCP) {
 
   // ============ NEXT TASK ============
   server.addTool({
-    name: "taskmaster_next_task",
+    name: "rtaskmaster_next_task",
     description:
       "Get the next task to work on based on priority and dependencies.",
     parameters: ProjectRootSchema,
@@ -495,7 +495,7 @@ export function registerTools(server: FastMCP) {
           content: [
             {
               type: "text",
-              text: "❌ TaskMaster is not initialized. Run taskmaster_init first.",
+              text: "❌ RTaskmaster is not initialized. Run rtaskmaster_init first.",
             },
           ],
         };
@@ -510,7 +510,7 @@ export function registerTools(server: FastMCP) {
             content: [
               {
                 type: "text",
-                text: "📋 No tasks yet. Create your first task using taskmaster_create_task.",
+                text: "📋 No tasks yet. Create your first task using rtaskmaster_create_task.",
               },
             ],
           };
@@ -556,7 +556,7 @@ export function registerTools(server: FastMCP) {
         }
       }
 
-      output += `\n💡 To start working: taskmaster_set_status with taskId="${task.id}" and status="in-progress"`;
+      output += `\n💡 To start working: rtaskmaster_set_status with taskId="${task.id}" and status="in-progress"`;
 
       return {
         content: [{ type: "text", text: output }],
@@ -566,7 +566,7 @@ export function registerTools(server: FastMCP) {
 
   // ============ GET STATS ============
   server.addTool({
-    name: "taskmaster_stats",
+    name: "rtaskmaster_stats",
     description: "Get task statistics and project progress.",
     parameters: ProjectRootSchema,
     execute: async (args) => {
@@ -577,7 +577,7 @@ export function registerTools(server: FastMCP) {
           content: [
             {
               type: "text",
-              text: "❌ TaskMaster is not initialized. Run taskmaster_init first.",
+              text: "❌ RTaskmaster is not initialized. Run rtaskmaster_init first.",
             },
           ],
         };
@@ -615,7 +615,7 @@ export function registerTools(server: FastMCP) {
 
   // ============ GENERATE TASKS.MD ============
   server.addTool({
-    name: "taskmaster_generate_tasks_md",
+    name: "rtaskmaster_generate_tasks_md",
     description:
       "Generate a human-readable TASKS.md checklist file from the current tasks. Creates or updates the file in the project root.",
     parameters: z.object({
@@ -635,7 +635,7 @@ export function registerTools(server: FastMCP) {
           content: [
             {
               type: "text",
-              text: "❌ TaskMaster is not initialized. Run taskmaster_init first.",
+              text: "❌ RTaskmaster is not initialized. Run rtaskmaster_init first.",
             },
           ],
         };
@@ -691,10 +691,10 @@ export function registerTools(server: FastMCP) {
 
       let content = `# Project Tasks
 
-> Generated by TaskMaster RBuildAI | Last updated: ${new Date().toISOString()}
+> Generated by RTaskmaster RBuildAI | Last updated: ${new Date().toISOString()}
 > 
 > Both humans and AI agents can update this file.
-> Source of truth: \`.taskmaster/tasks.json\`
+> Source of truth: \`.rtaskmaster/tasks.json\`
 
 ## 📊 Progress
 
@@ -740,7 +740,7 @@ export function registerTools(server: FastMCP) {
       }
 
       if (tasks.length === 0) {
-        content += `*No tasks yet. Create your first task using \`taskmaster_create_task\`.*\n\n`;
+        content += `*No tasks yet. Create your first task using \`rtaskmaster_create_task\`.*\n\n`;
       }
 
       content += `---
@@ -755,7 +755,7 @@ export function registerTools(server: FastMCP) {
 
 ---
 
-*Managed by [TaskMaster RBuildAI](https://github.com/RagnarPitla/TaskMaster-rbuildai-mcp)*
+*Managed by [RTaskmaster RBuildAI](https://github.com/RagnarPitla/RTaskmaster-rbuildai-mcp)*
 `;
 
       const tasksFilePath = path.join(args.projectRoot, "TASKS.md");
@@ -774,7 +774,7 @@ export function registerTools(server: FastMCP) {
 
   // ============ PARSE TASKS FROM REQUIREMENTS ============
   server.addTool({
-    name: "taskmaster_parse_prd",
+    name: "rtaskmaster_parse_prd",
     description:
       "Parse a PRD (Product Requirements Document) or README file and create tasks from it. Provide either content directly or a file path.",
     parameters: z.object({
@@ -801,7 +801,7 @@ export function registerTools(server: FastMCP) {
           content: [
             {
               type: "text",
-              text: "❌ TaskMaster is not initialized. Run taskmaster_init first.",
+              text: "❌ RTaskmaster is not initialized. Run rtaskmaster_init first.",
             },
           ],
         };
@@ -895,7 +895,7 @@ export function registerTools(server: FastMCP) {
         content: [
           {
             type: "text",
-            text: `✅ Created ${createdTasks.length} tasks from the content!\n\n📋 Tasks created:\n${taskList}\n\n💡 Use taskmaster_get_tasks to see all tasks, or taskmaster_update_task to modify details.`,
+            text: `✅ Created ${createdTasks.length} tasks from the content!\n\n📋 Tasks created:\n${taskList}\n\n💡 Use rtaskmaster_get_tasks to see all tasks, or rtaskmaster_update_task to modify details.`,
           },
         ],
       };
@@ -904,7 +904,7 @@ export function registerTools(server: FastMCP) {
 
   // ============ BULK SET STATUS ============
   server.addTool({
-    name: "taskmaster_bulk_status",
+    name: "rtaskmaster_bulk_status",
     description: "Update the status of multiple tasks at once.",
     parameters: z.object({
       projectRoot: z
@@ -921,7 +921,7 @@ export function registerTools(server: FastMCP) {
           content: [
             {
               type: "text",
-              text: "❌ TaskMaster is not initialized. Run taskmaster_init first.",
+              text: "❌ RTaskmaster is not initialized. Run rtaskmaster_init first.",
             },
           ],
         };

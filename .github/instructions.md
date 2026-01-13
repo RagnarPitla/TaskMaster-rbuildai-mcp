@@ -1,28 +1,28 @@
-# TaskMaster RBuildAI - Instructions for AI Agents
+# RTaskmaster - Instructions for AI Agents
 
-> **This file provides guidance for GitHub Copilot and other AI agents working with TaskMaster MCP.**
+> **This file provides guidance for GitHub Copilot and other AI agents working with RTaskmaster MCP.**
 
 ---
 
 ## 🎯 Overview
 
-TaskMaster is a task management MCP server designed to help you track project tasks during development. When you start working on a project, TaskMaster can create and manage a structured task list that both you (the human) and AI agents can update.
+RTaskmaster is a task management MCP server designed to help you track project tasks during development. When you start working on a project, RTaskmaster can create and manage a structured task list that both you (the human) and AI agents can update.
 
 ---
 
 ## 🚀 Getting Started Workflow
 
-When a user starts a new project or wants to use TaskMaster, follow these steps:
+When a user starts a new project or wants to use RTaskmaster, follow these steps:
 
-### Step 1: Initialize TaskMaster
+### Step 1: Initialize RTaskmaster
 
 ```
-Call: taskmaster_init
+Call: rtaskmaster_init
 - projectRoot: <absolute path to the project>
 - projectName: <optional project name>
 ```
 
-This creates a `.taskmaster/` directory with a `tasks.json` file.
+This creates a `.rtaskmaster/` directory with a `tasks.json` file.
 
 ### Step 2: Create a Project Plan (Optional but Recommended)
 
@@ -33,7 +33,7 @@ After initialization, help the user create a `TASKS.md` file in the project root
 ```markdown
 # Project Tasks
 
-> This file tracks project tasks. Status is synced with `.taskmaster/tasks.json`.
+> This file tracks project tasks. Status is synced with `.rtaskmaster/tasks.json`.
 > Both humans and AI agents can update this file.
 
 ## 📊 Progress
@@ -70,8 +70,8 @@ Add any project notes here.
 
 Help the user identify and create tasks for their project goals. For each major feature or requirement:
 
-1. Create a main task with `taskmaster_create_task`
-2. Add subtasks for implementation steps with `taskmaster_add_subtask`
+1. Create a main task with `rtaskmaster_create_task`
+2. Add subtasks for implementation steps with `rtaskmaster_add_subtask`
 3. Set appropriate priorities and dependencies
 
 ---
@@ -88,15 +88,15 @@ pending → in-progress → done
 
 ### When Starting Work on a Task
 
-1. Call `taskmaster_next_task` to get the highest priority available task
-2. Call `taskmaster_set_status` with `status: "in-progress"`
+1. Call `rtaskmaster_next_task` to get the highest priority available task
+2. Call `rtaskmaster_set_status` with `status: "in-progress"`
 3. Work on the implementation
-4. Call `taskmaster_set_status` with `status: "done"` when complete
+4. Call `rtaskmaster_set_status` with `status: "done"` when complete
 
 ### When a Task is Blocked
 
-- Call `taskmaster_set_status` with `status: "blocked"`
-- Add notes about what's blocking it using `taskmaster_update_task`
+- Call `rtaskmaster_set_status` with `status: "blocked"`
+- Add notes about what's blocking it using `rtaskmaster_update_task`
 
 ---
 
@@ -104,10 +104,10 @@ pending → in-progress → done
 
 ### ALWAYS Do:
 
-- ✅ Check `taskmaster_get_tasks` at the start of a session to understand project state
+- ✅ Check `rtaskmaster_get_tasks` at the start of a session to understand project state
 - ✅ Update task status when you complete work
 - ✅ Create subtasks for complex implementations
-- ✅ Use `taskmaster_next_task` to find what to work on
+- ✅ Use `rtaskmaster_next_task` to find what to work on
 - ✅ Mark tasks as `done` immediately after completing them
 
 ### NEVER Do:
@@ -121,7 +121,7 @@ pending → in-progress → done
 
 When working on code changes:
 
-1. First check if there's a relevant task in TaskMaster
+1. First check if there's a relevant task in RTaskmaster
 2. If there is, set it to `in-progress`
 3. After completing the work, set it to `done`
 4. If no task exists but the work is significant, offer to create one
@@ -155,16 +155,16 @@ For the `TASKS.md` file, use this checkbox format that both humans and AI can ea
 
 | Tool                     | Use When                                           |
 | ------------------------ | -------------------------------------------------- |
-| `taskmaster_init`        | Starting a new project                             |
-| `taskmaster_get_tasks`   | Need to see all tasks or filter by status/priority |
-| `taskmaster_get_task`    | Need details about a specific task                 |
-| `taskmaster_create_task` | Adding a new task                                  |
-| `taskmaster_update_task` | Modifying task details                             |
-| `taskmaster_delete_task` | Removing a task (use sparingly)                    |
-| `taskmaster_set_status`  | Changing task/subtask status                       |
-| `taskmaster_add_subtask` | Breaking down a task into smaller pieces           |
-| `taskmaster_next_task`   | Finding what to work on next                       |
-| `taskmaster_stats`       | Getting project progress overview                  |
+| `rtaskmaster_init`        | Starting a new project                             |
+| `rtaskmaster_get_tasks`   | Need to see all tasks or filter by status/priority |
+| `rtaskmaster_get_task`    | Need details about a specific task                 |
+| `rtaskmaster_create_task` | Adding a new task                                  |
+| `rtaskmaster_update_task` | Modifying task details                             |
+| `rtaskmaster_delete_task` | Removing a task (use sparingly)                    |
+| `rtaskmaster_set_status`  | Changing task/subtask status                       |
+| `rtaskmaster_add_subtask` | Breaking down a task into smaller pieces           |
+| `rtaskmaster_next_task`   | Finding what to work on next                       |
+| `rtaskmaster_stats`       | Getting project progress overview                  |
 
 ---
 
@@ -172,7 +172,7 @@ For the `TASKS.md` file, use this checkbox format that both humans and AI can ea
 
 ```
 your-project/
-├── .taskmaster/
+├── .rtaskmaster/
 │   ├── tasks.json      # JSON task store (source of truth)
 │   └── .gitignore      # Optional: ignore local-only data
 ├── TASKS.md            # Human-readable checklist (optional)
@@ -197,16 +197,16 @@ your-project/
 
 **AI Agent Actions**:
 
-1. `taskmaster_init` - Initialize TaskMaster
+1. `rtaskmaster_init` - Initialize RTaskmaster
 2. Create tasks:
    - Task 1: "Set up Express server" (high priority)
    - Task 2: "Create user model" (high, depends on 1)
    - Task 3: "Implement CRUD endpoints" (high, depends on 2)
    - Task 4: "Add authentication" (medium, depends on 3)
    - Task 5: "Write API tests" (medium, depends on 3)
-3. `taskmaster_next_task` - Get "Set up Express server"
+3. `rtaskmaster_next_task` - Get "Set up Express server"
 4. Work on implementation
-5. `taskmaster_set_status` - Mark as done
+5. `rtaskmaster_set_status` - Mark as done
 6. Repeat for next tasks
 
 ---
@@ -222,4 +222,4 @@ The JSON store is the source of truth. TASKS.md is for human convenience.
 
 ---
 
-_TaskMaster RBuildAI - Making AI-driven development organized and trackable._
+_RTaskmaster - Making AI-driven development organized and trackable._

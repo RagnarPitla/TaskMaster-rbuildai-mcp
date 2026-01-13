@@ -1,6 +1,6 @@
 {
   "servers": {
-    "taskmaster-rbuildai": {
+    "rtaskmaster": {
       "command": "node",
       "args": ["dist/index.js"],
       "type": "stdio"

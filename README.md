@@ -1,8 +1,8 @@
-# TaskMaster RBuildAI MCP
+# RTaskmaster MCP
 
 A task master MCP (Model Context Protocol) server for AI-driven development in VS Code, Cursor, and other MCP-compatible editors.
 
-[![npm version](https://badge.fury.io/js/taskmaster-rbuildai-mcp.svg)](https://www.npmjs.com/package/taskmaster-rbuildai-mcp)
+[![npm version](https://badge.fury.io/js/rtaskmaster-mcp.svg)](https://www.npmjs.com/package/rtaskmaster-mcp)
 
 ## Features
 
@@ -11,7 +11,7 @@ A task master MCP (Model Context Protocol) server for AI-driven development in V
 - 📊 **Status Tracking**: Track progress with status updates (pending, in-progress, done, blocked, deferred)
 - 🏷️ **Priority Levels**: Organize by priority (high, medium, low)
 - 🔗 **Dependencies**: Define task dependencies
-- 💾 **JSON Storage**: Simple file-based storage in `.taskmaster/tasks.json`
+- 💾 **JSON Storage**: Simple file-based storage in `.rtaskmaster/tasks.json`
 - 🤖 **AI-Ready**: Designed to work seamlessly with GitHub Copilot, Claude, and other AI assistants
 
 ## Quick Install for VS Code
@@ -23,9 +23,9 @@ Add to your VS Code MCP configuration at `.vscode/mcp.json` in your project:
 ```json
 {
   "servers": {
-    "taskmaster": {
+    "rtaskmaster": {
       "command": "npx",
-      "args": ["-y", "taskmaster-rbuildai-mcp"],
+      "args": ["-y", "rtaskmaster-mcp"],
       "type": "stdio"
     }
   }
@@ -35,7 +35,7 @@ Add to your VS Code MCP configuration at `.vscode/mcp.json` in your project:
 ### Option 2: Global Install
 
 ```bash
-npm install -g taskmaster-rbuildai-mcp
+npm install -g rtaskmaster-mcp
 ```
 
 Then add to `.vscode/mcp.json`:
@@ -43,8 +43,8 @@ Then add to `.vscode/mcp.json`:
 ```json
 {
   "servers": {
-    "taskmaster": {
-      "command": "taskmaster-rbuildai-mcp",
+    "rtaskmaster": {
+      "command": "rtaskmaster-mcp",
       "type": "stdio"
     }
   }
@@ -58,9 +58,9 @@ Add to `~/.cursor/mcp.json` or your project's `.cursor/mcp.json`:
 ```json
 {
   "mcpServers": {
-    "taskmaster": {
+    "rtaskmaster": {
       "command": "npx",
-      "args": ["-y", "taskmaster-rbuildai-mcp"]
+      "args": ["-y", "rtaskmaster-mcp"]
     }
   }
 }
@@ -68,7 +68,7 @@ Add to `~/.cursor/mcp.json` or your project's `.cursor/mcp.json`:
 
 ## 📖 AI Agent Instructions
 
-For AI agents (GitHub Copilot, Claude, etc.) to work effectively with TaskMaster, reference the instructions file:
+For AI agents (GitHub Copilot, Claude, etc.) to work effectively with RTaskmaster, reference the instructions file:
 
 **Location**: `.github/instructions.md` in this repository
 
@@ -82,33 +82,33 @@ The instructions file provides:
 
 ### Quick Workflow for AI Agents
 
-1. **Initialize**: `taskmaster_init` at project start
+1. **Initialize**: `rtaskmaster_init` at project start
 2. **Create tasks**: Break down requirements into tasks
-3. **Generate checklist**: `taskmaster_generate_tasks_md` for human-readable view
-4. **Work loop**: `taskmaster_next_task` → work → `taskmaster_set_status` → repeat
-5. **Track progress**: `taskmaster_stats` to see completion
+3. **Generate checklist**: `rtaskmaster_generate_tasks_md` for human-readable view
+4. **Work loop**: `rtaskmaster_next_task` → work → `rtaskmaster_set_status` → repeat
+5. **Track progress**: `rtaskmaster_stats` to see completion
 
 ## Available MCP Tools
 
 | Tool                           | Description                                  |
 | ------------------------------ | -------------------------------------------- |
-| `taskmaster_init`              | Initialize TaskMaster in a project           |
-| `taskmaster_get_tasks`         | Get all tasks with optional filtering        |
-| `taskmaster_get_task`          | Get a specific task by ID                    |
-| `taskmaster_create_task`       | Create a new task                            |
-| `taskmaster_update_task`       | Update an existing task                      |
-| `taskmaster_delete_task`       | Delete a task                                |
-| `taskmaster_set_status`        | Update task status                           |
-| `taskmaster_add_subtask`       | Add a subtask to a task                      |
-| `taskmaster_next_task`         | Get the next task to work on                 |
-| `taskmaster_stats`             | Get project statistics                       |
-| `taskmaster_generate_tasks_md` | Generate a human-readable TASKS.md checklist |
-| `taskmaster_parse_prd`         | Parse requirements/PRD files to create tasks |
-| `taskmaster_bulk_status`       | Update multiple task statuses at once        |
+| `rtaskmaster_init`              | Initialize RTaskmaster in a project           |
+| `rtaskmaster_get_tasks`         | Get all tasks with optional filtering        |
+| `rtaskmaster_get_task`          | Get a specific task by ID                    |
+| `rtaskmaster_create_task`       | Create a new task                            |
+| `rtaskmaster_update_task`       | Update an existing task                      |
+| `rtaskmaster_delete_task`       | Delete a task                                |
+| `rtaskmaster_set_status`        | Update task status                           |
+| `rtaskmaster_add_subtask`       | Add a subtask to a task                      |
+| `rtaskmaster_next_task`         | Get the next task to work on                 |
+| `rtaskmaster_stats`             | Get project statistics                       |
+| `rtaskmaster_generate_tasks_md` | Generate a human-readable TASKS.md checklist |
+| `rtaskmaster_parse_prd`         | Parse requirements/PRD files to create tasks |
+| `rtaskmaster_bulk_status`       | Update multiple task statuses at once        |
 
 ## 📋 TASKS.md Checklist File
 
-TaskMaster can generate a human-readable `TASKS.md` file that serves as a visual checklist:
+RTaskmaster can generate a human-readable `TASKS.md` file that serves as a visual checklist:
 
 ```markdown
 # Project Tasks
@@ -140,11 +140,11 @@ TaskMaster can generate a human-readable `TASKS.md` file that serves as a visual
 - [ ] Add user profile page (#3)
 ```
 
-Generate this file anytime using `taskmaster_generate_tasks_md`.
+Generate this file anytime using `rtaskmaster_generate_tasks_md`.
 
 ## Task Structure
 
-Tasks are stored in `.taskmaster/tasks.json`:
+Tasks are stored in `.rtaskmaster/tasks.json`:
 
 ```json
 {
@@ -215,8 +215,8 @@ Add a subtask to task 1: "Set up database schema"
 
 ```bash
 # Clone the repo
-git clone https://github.com/RagnarPitla/TaskMaster-rbuildai-mcp.git
-cd TaskMaster-rbuildai-mcp
+git clone https://github.com/RagnarPitla/RTaskmaster-rbuildai-mcp.git
+cd RTaskmaster-rbuildai-mcp
 
 # Install dependencies
 npm install
