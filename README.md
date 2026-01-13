@@ -66,20 +66,81 @@ Add to `~/.cursor/mcp.json` or your project's `.cursor/mcp.json`:
 }
 ```
 
+## 📖 AI Agent Instructions
+
+For AI agents (GitHub Copilot, Claude, etc.) to work effectively with TaskMaster, reference the instructions file:
+
+**Location**: `.github/instructions.md` in this repository
+
+The instructions file provides:
+
+- ✅ Getting started workflow
+- ✅ Task lifecycle management
+- ✅ Best practices for AI agents
+- ✅ TASKS.md checklist format
+- ✅ Example sessions
+
+### Quick Workflow for AI Agents
+
+1. **Initialize**: `taskmaster_init` at project start
+2. **Create tasks**: Break down requirements into tasks
+3. **Generate checklist**: `taskmaster_generate_tasks_md` for human-readable view
+4. **Work loop**: `taskmaster_next_task` → work → `taskmaster_set_status` → repeat
+5. **Track progress**: `taskmaster_stats` to see completion
+
 ## Available MCP Tools
 
-| Tool | Description |
-|------|-------------|
-| `taskmaster_init` | Initialize TaskMaster in a project |
-| `taskmaster_get_tasks` | Get all tasks with optional filtering |
-| `taskmaster_get_task` | Get a specific task by ID |
-| `taskmaster_create_task` | Create a new task |
-| `taskmaster_update_task` | Update an existing task |
-| `taskmaster_delete_task` | Delete a task |
-| `taskmaster_set_status` | Update task status |
-| `taskmaster_add_subtask` | Add a subtask to a task |
-| `taskmaster_next_task` | Get the next task to work on |
-| `taskmaster_stats` | Get project statistics |
+| Tool                           | Description                                  |
+| ------------------------------ | -------------------------------------------- |
+| `taskmaster_init`              | Initialize TaskMaster in a project           |
+| `taskmaster_get_tasks`         | Get all tasks with optional filtering        |
+| `taskmaster_get_task`          | Get a specific task by ID                    |
+| `taskmaster_create_task`       | Create a new task                            |
+| `taskmaster_update_task`       | Update an existing task                      |
+| `taskmaster_delete_task`       | Delete a task                                |
+| `taskmaster_set_status`        | Update task status                           |
+| `taskmaster_add_subtask`       | Add a subtask to a task                      |
+| `taskmaster_next_task`         | Get the next task to work on                 |
+| `taskmaster_stats`             | Get project statistics                       |
+| `taskmaster_generate_tasks_md` | Generate a human-readable TASKS.md checklist |
+| `taskmaster_parse_prd`         | Parse requirements/PRD files to create tasks |
+| `taskmaster_bulk_status`       | Update multiple task statuses at once        |
+
+## 📋 TASKS.md Checklist File
+
+TaskMaster can generate a human-readable `TASKS.md` file that serves as a visual checklist:
+
+```markdown
+# Project Tasks
+
+## 📊 Progress
+
+| Status         | Count |
+| -------------- | ----- |
+| ✅ Done        | 2     |
+| 🔄 In Progress | 1     |
+| ⏳ Pending     | 3     |
+| **Total**      | **6** |
+
+**Completion: 33%**
+
+---
+
+## ✅ Tasks
+
+### 🔴 High Priority
+
+- [x] Set up project structure (#1)
+- [ ] 🔄 Implement authentication (#2)
+  - [x] Set up OAuth (#2.1)
+  - [ ] Add JWT tokens (#2.2)
+
+### 🟡 Medium Priority
+
+- [ ] Add user profile page (#3)
+```
+
+Generate this file anytime using `taskmaster_generate_tasks_md`.
 
 ## Task Structure
 
@@ -134,21 +195,21 @@ Add a subtask to task 1: "Set up database schema"
 
 ## Task Statuses
 
-| Status | Description |
-|--------|-------------|
-| `pending` | Task not yet started |
-| `in-progress` | Currently being worked on |
-| `done` | Completed |
-| `blocked` | Cannot proceed (waiting on something) |
-| `deferred` | Postponed for later |
+| Status        | Description                           |
+| ------------- | ------------------------------------- |
+| `pending`     | Task not yet started                  |
+| `in-progress` | Currently being worked on             |
+| `done`        | Completed                             |
+| `blocked`     | Cannot proceed (waiting on something) |
+| `deferred`    | Postponed for later                   |
 
 ## Priority Levels
 
-| Priority | Description |
-|----------|-------------|
-| `high` | Urgent/critical tasks |
+| Priority | Description               |
+| -------- | ------------------------- |
+| `high`   | Urgent/critical tasks     |
 | `medium` | Normal priority (default) |
-| `low` | Can wait |
+| `low`    | Can wait                  |
 
 ## Development
 
