@@ -2,13 +2,13 @@
  * Task Storage - File-based JSON storage for tasks
  */
 
-import * as fs from 'node:fs';
-import * as path from 'node:path';
-import type { Task, TaskStore } from './types.js';
+import * as fs from "node:fs";
+import * as path from "node:path";
+import type { Task, TaskStore } from "./types.js";
 
-const RTASKMASTER_DIR = '.rtaskmaster';
-const TASKS_FILE = 'tasks.json';
-const VERSION = '1.0.0';
+const RTASKMASTER_DIR = ".rtaskmaster";
+const TASKS_FILE = "tasks.json";
+const VERSION = "1.0.0";
 
 export class TaskStorage {
   private projectRoot: string;
@@ -31,7 +31,7 @@ export class TaskStorage {
    */
   initialize(projectName?: string): TaskStore {
     const rtaskmasterDir = path.join(this.projectRoot, RTASKMASTER_DIR);
-    
+
     if (!fs.existsSync(rtaskmasterDir)) {
       fs.mkdirSync(rtaskmasterDir, { recursive: true });
     }
@@ -44,11 +44,11 @@ export class TaskStorage {
     };
 
     this.save(store);
-    
+
     // Create .gitignore in .rtaskmaster if it doesn't exist
-    const gitignorePath = path.join(rtaskmasterDir, '.gitignore');
+    const gitignorePath = path.join(rtaskmasterDir, ".gitignore");
     if (!fs.existsSync(gitignorePath)) {
-      fs.writeFileSync(gitignorePath, '# RTaskmaster files to ignore\n');
+      fs.writeFileSync(gitignorePath, "# RTaskmaster files to ignore\n");
     }
 
     return store;
@@ -60,11 +60,11 @@ export class TaskStorage {
   load(): TaskStore {
     if (!this.isInitialized()) {
       throw new Error(
-        'RTaskmaster is not initialized in this project. Run rtaskmaster_init first.'
+        "RTaskmaster is not initialized in this project. Run rtaskmaster_init first."
       );
     }
 
-    const content = fs.readFileSync(this.tasksPath, 'utf-8');
+    const content = fs.readFileSync(this.tasksPath, "utf-8");
     return JSON.parse(content) as TaskStore;
   }
 
@@ -74,7 +74,7 @@ export class TaskStorage {
   save(store: TaskStore): void {
     store.lastUpdated = new Date().toISOString();
     const content = JSON.stringify(store, null, 2);
-    fs.writeFileSync(this.tasksPath, content, 'utf-8');
+    fs.writeFileSync(this.tasksPath, content, "utf-8");
   }
 
   /**
